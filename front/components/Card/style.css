@@ -1,0 +1,16 @@
+.card {
+  background: white;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.header {
+  padding: 5px 20px;
+  background-color: #50514F;
+  border-radius: 2px 2px 0 0;
+  color: #FFED65;
+}
+
+.content {
+  padding: 20px;
+}
