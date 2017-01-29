@@ -23,7 +23,8 @@ const SolutionSchema = new Schema({
     type: Date
   },
   code: {
-    type: String
+    type: String,
+    default: taskData.initialCode // TODO: dynamic task selection with its code
   },
   results: {
     type: [{
@@ -84,7 +85,8 @@ SolutionSchema.statics = {
 export function serializeSolution(solution) {
   return {
     ...solution.toJSON(),
-    remainingTime: solution.getRemainingTime()
+    remainingTime: solution.getRemainingTime(),
+    description: taskData.description // TODO: dynamic task selection with its description
   }
 }
 

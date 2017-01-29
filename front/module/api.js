@@ -11,3 +11,7 @@ const fetch = axios.create({
 export function fetchActiveTask(name) {
   return fetch.post('solutions', { name })
 }
+
+export function fetchTaskById(taskId) {
+  return fetch.get(`solutions/${taskId}`)
+}

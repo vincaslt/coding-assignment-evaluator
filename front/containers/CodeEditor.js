@@ -2,6 +2,8 @@ import CodeMirror from 'react-codemirror'
 import { connect } from 'react-redux'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/lib/codemirror.css'
+import { activeTask } from '../module/selectors'
+import { setCode } from '../module/actions'
 
 const options = {
   lineNumbers: true,
@@ -9,17 +11,12 @@ const options = {
 }
 
 const mapStateToProps = state => ({
-  value: '// some code here',
+  value: activeTask(state).code,
   options
 })
 
 const mapDispatchToProps = {
-  onChange: (newCode) => {
-    console.log(newCode)
-    return {
-      type: 'CODE_CHANGED',
-    }
-  }
+  onChange: code => setCode(code)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CodeMirror)
