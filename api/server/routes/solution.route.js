@@ -13,6 +13,8 @@ router.route('/')
 router.route('/:solutionId')
   /** GET /api/solutions/:solutionId - Get solution */
   .get(solutionController.get)
+  /** POST /api/solutions/:solutionId - update existing solution */
+  .post(solutionController.update)
 
 /** Load solution when API with solutionId route parameter is hit */
 router.param('solutionId', solutionController.load)

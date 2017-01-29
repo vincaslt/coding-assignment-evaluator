@@ -1,6 +1,8 @@
 import mongoose, { Schema } from 'mongoose'
 import httpStatus from 'http-status'
+import Promise from 'bluebird'
 import APIError from '../helpers/APIError'
+import taskData from '../taskData'
 
 const SolutionSchema = new Schema({
   name: {
@@ -40,7 +42,14 @@ const SolutionSchema = new Schema({
   }
 })
 
-// TODO: instance method getTimeRemaining
+SolutionSchema.methods = {
+  getRemainingTime() {
+    // TODO: get task from database
+    const elapsed = Date.now() - this.startedAt.getTime()
+    const remaining = taskData.timeLimit - elapsed
+    return remaining > 0 ? remaining : 0
+  }
+}
 
 SolutionSchema.statics = {
   /**
@@ -59,16 +68,23 @@ SolutionSchema.statics = {
       })
   },
 
-  findActiveByIp(ip) {
-    // TODO: account for remaining time > 0
-    return this.findOne({ ip })
+  findActive(query) {
+    return this.find(query)
       .exec()
-      .then((solution) => {
-        if (solution) {
-          return solution
+      .then((solutions = []) => {
+        const activeSolution = solutions.find(solution => solution.getRemainingTime() > 0)
+        if (activeSolution) {
+          return activeSolution
         }
-        return Promise.reject(new APIError('No such solution exists!', httpStatus.NOT_FOUND))
+        return Promise.reject(new APIError('No active solution exists!', httpStatus.NOT_FOUND))
       })
+  }
+}
+
+export function serializeSolution(solution) {
+  return {
+    ...solution.toJSON(),
+    remainingTime: solution.getRemainingTime()
   }
 }
 

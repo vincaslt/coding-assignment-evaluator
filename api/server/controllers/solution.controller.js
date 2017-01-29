@@ -1,4 +1,9 @@
-import Solution from '../models/solution.model'
+import httpStatus from 'http-status'
+import Promise from 'bluebird'
+import APIError from '../helpers/APIError'
+import Solution, { serializeSolution } from '../models/solution.model'
+import sandboxTest from '../helpers/sandbox'
+import taskData from '../taskData'
 
 /**
  * Loads solution and appends it to req
@@ -24,7 +29,7 @@ function create(req, res, next) {
   })
 
   solution.save()
-    .then(savedSolution => res.json(savedSolution))
+    .then(savedSolution => res.json(serializeSolution(savedSolution)))
     .catch(e => next(e))
 }
 
@@ -34,9 +39,8 @@ function create(req, res, next) {
  * @returns {Solution}
  */
 function findOrCreate(req, res, next) {
-  console.log(req.ip)
-  Solution.findActiveByIp(req.ip)
-    .then(solution => res.json(solution))
+  Solution.findActive({ ip: req.ip })
+    .then(solution => res.json(serializeSolution(solution)))
     .catch(() => create(req, res, next))
 }
 
@@ -45,7 +49,42 @@ function findOrCreate(req, res, next) {
  * @returns {Solution}
  */
 function get(req, res) {
-  return res.json(req.solution)
+  return res.json(serializeSolution(req.solution))
 }
 
-export default { load, get, findOrCreate, create }
+/**
+ * Update the existing solution
+ * @property {string} req.body.code - latest code.
+ */
+function update(req, res, next) {
+  const solution = req.solution
+  if (solution.getRemainingTime() > 0 && solution.ip === req.ip) {
+    solution.code = req.body.code
+    solution.submittedAt = Date.now()
+    solution.results = []
+    solution.save()
+      .then((updatedSolution) => {
+        res.json(serializeSolution(updatedSolution))
+        testSolution(updatedSolution)
+      })
+      .catch(e => next(e))
+  } else {
+    next(new APIError('Only active games that are owned by your ip can be updated!', httpStatus.FORBIDDEN))
+  }
+}
+
+function testSolution(solution) {
+  const updatedSolution = solution
+  Promise.all(
+    taskData.tests.map(test => sandboxTest(solution.code, taskData.execName, test))
+  ).then((outputs) => {
+    updatedSolution.results = outputs.map(out => ({
+      arguments: out.arguments,
+      result: out.result,
+      success: out.success
+    }))
+    return updatedSolution.save()
+  })
+}
+
+export default { load, get, findOrCreate, create, update }
