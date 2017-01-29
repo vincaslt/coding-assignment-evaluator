@@ -6,7 +6,7 @@ import Button from '../Button'
 import Card from '../Card'
 import style from './style.css'
 
-const MainPage = ({ name, setName, startTask }) => (
+const MainPage = ({ name, onNameInputChange, onStartClick }) => (
   <div styleName="content-container">
     <div styleName="content">
       <Card>
@@ -15,13 +15,14 @@ const MainPage = ({ name, setName, startTask }) => (
             styleName="input"
             type="text"
             placeholder="Your Name"
-            onChange={e => setName(e.target.value)}
+            value={name}
+            onChange={e => onNameInputChange(e.target.value)}
           />
           <div styleName="action">
             <Link to="/task/xxx123">
               <Button
                 disabled={!name}
-                onClick={() => startTask()}
+                onClick={() => onStartClick()}
               >
                 Start
               </Button>
@@ -34,8 +35,8 @@ const MainPage = ({ name, setName, startTask }) => (
 )
 
 MainPage.propTypes = {
-  setName: PropTypes.func.isRequired,
-  startTask: PropTypes.func.isRequired,
+  onNameInputChange: PropTypes.func.isRequired,
+  onStartClick: PropTypes.func.isRequired,
   name: PropTypes.string
 }
 

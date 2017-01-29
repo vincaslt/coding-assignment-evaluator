@@ -16,7 +16,7 @@ const TaskPage = () => (
     <div styleName="code-editor">
       <Card headerText="Code">
         <CodeEditor />
-        <div>
+        <div styleName="actions">
           <Button>Submit</Button>
         </div>
       </Card>

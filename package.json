@@ -45,7 +45,6 @@
     "method-override": "^2.3.5",
     "mongoose": "4.7.4",
     "morgan": "1.7.0",
-    "qs": "^6.3.0",
     "react": "^15.4.1",
     "react-codemirror": "^0.3.0",
     "react-css-modules": "^4.1.0",

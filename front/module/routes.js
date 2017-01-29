@@ -1,4 +1,4 @@
-import MainPage from '../components/MainPage'
+import MainPage from '../containers/MainPageContainer'
 import TaskPage from '../components/TaskPage'
 import AppLayout from '../components/AppLayout'
 
