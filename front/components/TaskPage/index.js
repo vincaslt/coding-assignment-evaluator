@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules'
 
 import CodeEditor from '../../containers/CodeEditor'
 import Card from '../Card'
+import Button from '../Button'
 import style from './style.css'
 
 const TaskPage = () => (
@@ -15,6 +16,9 @@ const TaskPage = () => (
     <div styleName="code-editor">
       <Card headerText="Code">
         <CodeEditor />
+        <div>
+          <Button>Submit</Button>
+        </div>
       </Card>
     </div>
   </div>
