@@ -2,7 +2,7 @@ import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { activeTask } from '../module/selectors'
 import TaskPage from '../components/TaskPage'
-import { requestTask } from '../module/actions'
+import { requestTask, submitSolution } from '../module/actions'
 
 class TaskPageContainer extends PureComponent {
   componentWillMount() {
@@ -10,12 +10,13 @@ class TaskPageContainer extends PureComponent {
   }
 
   render() {
-    const { description, loading } = this.props
-    return <TaskPage description={description} loading={loading} />
+    const { description, loading, submit } = this.props
+    return <TaskPage description={description} loading={loading} onSubmit={submit} />
   }
 }
 
 TaskPageContainer.propTypes = {
+  submit: PropTypes.func.isRequired,
   loadTask: PropTypes.func.isRequired,
   routeParams: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   description: PropTypes.string,
@@ -33,6 +34,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
+  submit: () => submitSolution(),
   loadTask: id => requestTask(id)
 }
 

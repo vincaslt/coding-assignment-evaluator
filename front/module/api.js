@@ -8,10 +8,16 @@ const fetch = axios.create({
 /**
  * Start a new task or fetch an existing active task
  */
-export function fetchActiveTask(name) {
+function fetchActiveTask(name) {
   return fetch.post('solutions', { name })
 }
 
-export function fetchTaskById(taskId) {
+function fetchTaskById(taskId) {
   return fetch.get(`solutions/${taskId}`)
 }
+
+function submitSolution(taskId, code) {
+  return fetch.post(`solutions/${taskId}`, { code })
+}
+
+export default { fetchActiveTask, fetchTaskById, submitSolution }

@@ -1,5 +1,6 @@
 import MainPage from '../containers/MainPageContainer'
 import TaskPage from '../containers/TaskPageContainer'
+import ResultsPage from '../components/ResultsPage'
 import AppLayout from '../components/AppLayout'
 
 const routes = {
@@ -10,7 +11,10 @@ const routes = {
     {
       path: 'task/:id',
       component: TaskPage
-      // TODO: add results page
+    },
+    {
+      path: 'task/:id/results',
+      component: ResultsPage
     }
   ]
 }

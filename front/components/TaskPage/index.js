@@ -7,7 +7,7 @@ import Button from '../Button'
 import Spinner from '../Spinner'
 import style from './style.css'
 
-const TaskPage = ({ description, loading }) => {
+const TaskPage = ({ description, loading, onSubmit }) => {
   const spinner = <Spinner>loading</Spinner>
   return loading ? spinner : (
     <div styleName="content">
@@ -20,7 +20,7 @@ const TaskPage = ({ description, loading }) => {
         <Card headerText="Code">
           <CodeEditor />
           <div styleName="actions">
-            <Button>Submit</Button>
+            <Button onClick={() => onSubmit()}>Submit</Button>
           </div>
         </Card>
       </div>
@@ -29,6 +29,7 @@ const TaskPage = ({ description, loading }) => {
 }
 
 TaskPage.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
   description: PropTypes.string,
   loading: PropTypes.bool
 }

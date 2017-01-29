@@ -24,3 +24,6 @@ export const receiveTask = (({
 
 export const SET_CODE = 'SET_CODE'
 export const setCode = code => ({ type: SET_CODE, payload: { code } })
+
+export const SUBMIT_SOLUTION = 'SUBMIT_SOLUTION'
+export const submitSolution = () => ({ type: SUBMIT_SOLUTION })
