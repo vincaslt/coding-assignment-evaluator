@@ -1,0 +1,17 @@
+.success {
+  background: rgba(21, 218, 37, 0.3);
+  border: 1px solid rgba(21, 218, 37, 0.8);
+  color: rgb(14, 138, 22);
+}
+
+.fail {
+  background: rgba(243, 62, 52, 0.3);
+  border: 1px solid rgba(243, 62, 52, 0.8);
+  color: rgb(193, 10, 10);
+}
+
+.entry {
+  font-size: 20px;
+  margin: 5px 0;
+  padding: 5px;
+}

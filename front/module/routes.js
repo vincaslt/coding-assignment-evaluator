@@ -1,6 +1,6 @@
 import MainPage from '../containers/MainPageContainer'
 import TaskPage from '../containers/TaskPageContainer'
-import ResultsPage from '../components/ResultsPage'
+import ResultsPage from '../containers/ResultsPageContainer'
 import AppLayout from '../components/AppLayout'
 
 const routes = {

@@ -7,9 +7,8 @@ import Button from '../Button'
 import Spinner from '../Spinner'
 import style from './style.css'
 
-const TaskPage = ({ description, loading, onSubmit }) => {
-  const spinner = <Spinner>loading</Spinner>
-  return loading ? spinner : (
+const TaskPage = ({ description, loading, onSubmit }) => (
+  loading ? <Spinner /> : (
     <div styleName="content">
       <div styleName="description">
         <Card headerText="Task description">
@@ -26,7 +25,7 @@ const TaskPage = ({ description, loading, onSubmit }) => {
       </div>
     </div>
   )
-}
+)
 
 TaskPage.propTypes = {
   onSubmit: PropTypes.func.isRequired,

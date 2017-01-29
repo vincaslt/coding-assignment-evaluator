@@ -1,0 +1,23 @@
+.content-container {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.content {
+  width: 50%;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+}
+
+.action {
+  justify-content: center;
+  display: flex;
+}
+
+.action button {
+  min-width: 60px;
+}

@@ -25,7 +25,9 @@ function* requestStartTaskSaga() {
 function* requestTaskSaga({ payload }) {
   const { data } = yield call(api.fetchTaskById, payload.taskId)
   yield call(saveTaskData, data)
-  // TODO: redirect to results if it's not active
+  if (data.remainingTime === 0 || data.results.length > 0) {
+    yield put(push(`/task/${data._id}/results`))
+  }
 }
 
 function* submitSolutionSaga() {
