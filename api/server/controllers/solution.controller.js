@@ -3,7 +3,7 @@ import Promise from 'bluebird'
 import APIError from '../helpers/APIError'
 import Solution, { serializeSolution } from '../models/solution.model'
 import sandboxTest from '../helpers/sandbox'
-import taskData from '../taskData'
+import Task from '../models/task.model'
 
 /**
  * Loads solution and appends it to req
@@ -23,12 +23,17 @@ function load(req, res, next, id) {
  * @returns {Solution}
  */
 function create(req, res, next) {
-  const solution = new Solution({
-    name: req.body.name,
-    ip: req.ip
-  })
+  Task.getLatest()
+    .then((latestTask) => {
+      const solution = new Solution({
+        name: req.body.name,
+        ip: req.ip,
+        code: latestTask.initialCode,
+        task: latestTask
+      })
 
-  solution.save()
+      return solution.save()
+    })
     .then(savedSolution => res.json(serializeSolution(savedSolution)))
     .catch(e => next(e))
 }
@@ -76,7 +81,7 @@ function update(req, res, next) {
 function testSolution(solution) {
   const updatedSolution = solution
   Promise.all(
-    taskData.tests.map(test => sandboxTest(solution.code, taskData.execName, test))
+    solution.task.tests.map(test => sandboxTest(solution.code, solution.task.execName, test))
   ).then((outputs) => {
     updatedSolution.results = outputs.map(out => ({
       arguments: out.arguments,

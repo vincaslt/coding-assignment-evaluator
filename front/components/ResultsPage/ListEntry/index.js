@@ -4,7 +4,7 @@ import style from './style.css'
 
 const ListEntry = result => (
   <div styleName={`entry ${result.success ? 'success' : 'fail'}`}>
-    {`With arguments (${result.arguments}) got ${result.result}`}
+    {`With arguments (${result.arguments.join(', ')}) got ${result.result}`}
   </div>
 )
 export const ResultPropTypes = {

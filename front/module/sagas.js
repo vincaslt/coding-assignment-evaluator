@@ -7,7 +7,7 @@ import { userInfo, activeTask, code as codeSelector } from './selectors'
 
 function* saveTaskData(data) {
   yield put(receiveTask({
-    id: data._id,
+    id: data.id,
     description: data.description,
     initialCode: data.code,
     remainingTime: data.remainingTime,
@@ -20,7 +20,7 @@ function* requestStartTaskSaga() {
   const { name } = yield select(userInfo)
   const { data } = yield call(api.fetchActiveTask, name)
   yield call(saveTaskData, data)
-  yield put(push(`/task/${data._id}`))
+  yield put(push(`/task/${data.id}`))
 }
 
 function* requestTaskSaga({ payload }) {

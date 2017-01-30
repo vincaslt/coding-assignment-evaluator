@@ -39,13 +39,13 @@ const activeTask = (state = activeTaskInitialState, { type, payload }) => {
   }
 }
 
-const codeInitialState = null
+const codeInitialState = ''
 const code = (state = codeInitialState, { type, payload }) => {
   switch (type) {
     case END_TASK:
       return codeInitialState
     case RECEIVE_TASK:
-      return state === null ? payload.initialCode.slice() : state
+      return !state ? payload.initialCode.slice() : state
     case SET_CODE:
       return payload.code.slice()
     default:

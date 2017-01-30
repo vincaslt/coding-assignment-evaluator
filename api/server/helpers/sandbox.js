@@ -18,9 +18,9 @@ export default function sandboxTest(code, execName, test) {
     try {
       const result = vm.run(`${code} ${execName}(${args})`)
       resolve({
-        success: result === test.result,
+        success: result !== undefined && result === test.result,
         arguments: test.arguments,
-        result
+        result: result === undefined ? 'Compilation error' : result
       })
     } catch (e) {
       debug('Trying to test invalid code')

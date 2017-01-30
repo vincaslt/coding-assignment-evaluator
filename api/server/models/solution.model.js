@@ -2,7 +2,6 @@ import mongoose, { Schema } from 'mongoose'
 import httpStatus from 'http-status'
 import Promise from 'bluebird'
 import APIError from '../helpers/APIError'
-import taskData from '../taskData'
 
 const SolutionSchema = new Schema({
   name: {
@@ -14,6 +13,11 @@ const SolutionSchema = new Schema({
     required: true,
     match: [/^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/, '{VALUE} is not a valid ip number.']
   },
+  task: {
+    type: Schema.Types.ObjectId,
+    ref: 'Task',
+    required: true
+  },
   startedAt: {
     type: Date,
     default: Date.now,
@@ -23,8 +27,7 @@ const SolutionSchema = new Schema({
     type: Date
   },
   code: {
-    type: String,
-    default: taskData.initialCode // TODO: dynamic task selection with its code
+    type: String
   },
   results: {
     type: [{
@@ -45,9 +48,8 @@ const SolutionSchema = new Schema({
 
 SolutionSchema.methods = {
   getRemainingTime() {
-    // TODO: get task from database
     const elapsed = Date.now() - this.startedAt.getTime()
-    const remaining = taskData.timeLimit - elapsed
+    const remaining = this.task.timeLimit - elapsed
     return remaining > 0 ? remaining : 0
   }
 }
@@ -60,6 +62,7 @@ SolutionSchema.statics = {
    */
   get(id) {
     return this.findById(id)
+      .populate('task')
       .exec()
       .then((solution) => {
         if (solution) {
@@ -71,6 +74,7 @@ SolutionSchema.statics = {
 
   findActive(query) {
     return this.find(query)
+      .populate('task')
       .exec()
       .then((solutions = []) => {
         const activeSolution = solutions.find(solution => (
@@ -86,9 +90,15 @@ SolutionSchema.statics = {
 
 export function serializeSolution(solution) {
   return {
-    ...solution.toJSON(),
+    id: solution._id,
+    name: solution.name,
+    ip: solution.ip,
+    startedAt: solution.startedAt,
+    submittedAt: solution.submittedAt,
+    code: solution.code,
+    results: solution.results,
     remainingTime: solution.getRemainingTime(),
-    description: taskData.description // TODO: dynamic task selection with its description
+    description: solution.task.description
   }
 }
 
