@@ -44,6 +44,23 @@ export const endTask = () => ({ type: END_TASK })
 export const ADMIN_SUBMIT_FORM = 'ADMIN_SUBMIT_FORM'
 export const adminSubmitForm = () => ({ type: ADMIN_SUBMIT_FORM })
 
+export const LOAD_LATEST_TASK_INFO = 'LOAD_LATEST_TASK_INFO'
+export const loadLatestTaskInfo = () => ({ type: LOAD_LATEST_TASK_INFO })
+
+export const RECEIVE_LATEST_TASK_INFO = 'RECEIVE_LATEST_TASK_INFO'
+export const receiveLatestTaskInfo = ({
+  description, initialCode, execName, timeLimit, tests
+}) => ({
+  type: RECEIVE_LATEST_TASK_INFO,
+  payload: {
+    description,
+    code: initialCode,
+    execName,
+    timeLimit,
+    tests: JSON.stringify(tests)
+  }
+})
+
 export const ADMIN_CHANGE_DESCRIPTION = 'ADMIN_CHANGE_DESCRIPTION'
 export const adminChangeDescription = description => ({
   type: ADMIN_CHANGE_DESCRIPTION,

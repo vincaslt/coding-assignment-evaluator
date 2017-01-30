@@ -10,11 +10,12 @@ import {
   adminChangeTimeLimit,
   adminChangeTests,
   adminChangePassword,
+  loadLatestTaskInfo
 } from '../module/actions'
 
 class AdminPageContainer extends PureComponent {
   componentWillMount() {
-    console.log('todo: load form data')
+    this.props.loadLatestTask()
   }
 
   render() {
@@ -36,6 +37,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
+  loadLatestTask: () => loadLatestTaskInfo(),
   onSubmit: () => adminSubmitForm(),
   onChangeDescription: description => adminChangeDescription(description),
   onChangeCode: code => adminChangeCode(code),

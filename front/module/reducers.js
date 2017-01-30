@@ -12,7 +12,9 @@ import {
   ADMIN_CHANGE_CODE,
   ADMIN_CHANGE_TIME_LIMIT,
   ADMIN_CHANGE_TESTS,
-  ADMIN_CHANGE_PASSWORD
+  ADMIN_CHANGE_PASSWORD,
+  LOAD_LATEST_TASK_INFO,
+  RECEIVE_LATEST_TASK_INFO
 } from './actions'
 
 const userInfoInitialState = { name: '' }
@@ -99,6 +101,17 @@ const taskForm = (state = taskFormInitialState, { type, payload }) => {
       return {
         ...state,
         password: payload.password
+      }
+    case LOAD_LATEST_TASK_INFO:
+      return {
+        ...state,
+        loading: true
+      }
+    case RECEIVE_LATEST_TASK_INFO:
+      return {
+        ...state,
+        ...payload,
+        loading: false
       }
     default:
       return state

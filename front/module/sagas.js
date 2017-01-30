@@ -10,6 +10,8 @@ import {
   RECEIVE_TASK,
   END_TASK,
   ADMIN_SUBMIT_FORM,
+  LOAD_LATEST_TASK_INFO,
+  receiveLatestTaskInfo,
   receiveTask,
   timerTick,
   stopTaskTimer,
@@ -94,6 +96,13 @@ function* watchSubmitAdminFormSaga() {
   }
 }
 
+function* watchLoadAdminFormSaga() {
+  while (yield take(LOAD_LATEST_TASK_INFO)) {
+    const { data } = yield call(api.fetchLatestTask)
+    yield put(receiveLatestTaskInfo(data))
+  }
+}
+
 function* watchStartTaskTimerSaga() {
   while (yield take(START_TASK_TIMER)) {
     let task = yield select(activeTask)
@@ -116,7 +125,8 @@ const sagas = [
   watchSubmitSolutionSaga,
   watchStartTaskTimerSaga,
   watchEndTaskSaga,
-  watchSubmitAdminFormSaga
+  watchSubmitAdminFormSaga,
+  watchLoadAdminFormSaga
 ]
 
 export default function runSagas(sagaMiddleware) {

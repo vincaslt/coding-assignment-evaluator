@@ -32,4 +32,14 @@ function create(req, res, next) {
   }
 }
 
-export default { create }
+/**
+ * Get the latest task
+ * @returns {Task}
+ */
+function get(req, res, next) {
+  Task.getLatest()
+    .then(solution => res.json(serializeTask(solution)))
+    .catch(e => next(e))
+}
+
+export default { create, get }
