@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { taskForm } from '../module/selectors'
+import { taskForm, latestSolutionsSelector, testsSelector } from '../module/selectors'
 import AdminPage, { propTypes, defaultProps } from '../components/AdminPage'
 import {
   adminSubmitForm,
@@ -10,12 +10,14 @@ import {
   adminChangeTimeLimit,
   adminChangeTests,
   adminChangePassword,
-  loadLatestTaskInfo
+  loadLatestTaskInfo,
+  requestLatestSolutions
 } from '../module/actions'
 
 class AdminPageContainer extends PureComponent {
   componentWillMount() {
     this.props.loadLatestTask()
+    this.props.loadSolutions()
   }
 
   render() {
@@ -25,7 +27,11 @@ class AdminPageContainer extends PureComponent {
   }
 }
 
-AdminPageContainer.propTypes = propTypes
+AdminPageContainer.propTypes = {
+  ...propTypes,
+  loadLatestTask: PropTypes.func.isRequired,
+  loadSolutions: PropTypes.func.isRequired
+}
 AdminPageContainer.defaultProps = defaultProps
 
 const mapStateToProps = state => ({
@@ -33,11 +39,13 @@ const mapStateToProps = state => ({
   code: taskForm(state).code,
   execName: taskForm(state).execName,
   timeLimit: taskForm(state).timeLimit,
-  testsString: taskForm(state).tests
+  testsString: taskForm(state).tests,
+  solutions: latestSolutionsSelector(state)
 })
 
 const mapDispatchToProps = {
   loadLatestTask: () => loadLatestTaskInfo(),
+  loadSolutions: () => requestLatestSolutions(),
   onSubmit: () => adminSubmitForm(),
   onChangeDescription: description => adminChangeDescription(description),
   onChangeCode: code => adminChangeCode(code),

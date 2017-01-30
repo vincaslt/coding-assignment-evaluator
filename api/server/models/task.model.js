@@ -78,7 +78,11 @@ TaskSchema.statics = {
 
 export function serializeTask(task) {
   return {
-    ...task.toJSON()
+    ...task.toJSON(),
+    tests: task.tests.map(test => ({
+      arguments: test.arguments,
+      result: test.result
+    }))
   }
 }
 

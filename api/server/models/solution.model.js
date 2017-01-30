@@ -55,6 +55,20 @@ SolutionSchema.methods = {
 }
 
 SolutionSchema.statics = {
+  getLatest(count) {
+    return this.find({})
+      .sort({'submittedAt': -1})
+      .limit(20)
+      .populate('task')
+      .exec()
+      .then((solutions) => {
+        if (solutions) {
+          return solutions
+        }
+        return Promise.reject(new APIError('There are no solutions!', httpStatus.NOT_FOUND, true))
+      })
+  },
+
   /**
    * Get solution by id
    * @param {ObjectId} id - The objectId of solution.

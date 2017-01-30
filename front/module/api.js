@@ -20,6 +20,10 @@ function fetchLatestTask() {
   return fetch.get('tasks')
 }
 
+function fetchLatestSolutions() {
+  return fetch.get('solutions')
+}
+
 function submitSolution(taskId, code) {
   return fetch.post(`solutions/${taskId}`, { code })
 }
@@ -35,4 +39,11 @@ function submitTaskForm({ description, execName, code, timeLimit, tests, passwor
   })
 }
 
-export default { fetchActiveTask, fetchTaskById, submitSolution, submitTaskForm, fetchLatestTask }
+export default {
+  fetchActiveTask,
+  fetchTaskById,
+  submitSolution,
+  submitTaskForm,
+  fetchLatestTask,
+  fetchLatestSolutions
+}

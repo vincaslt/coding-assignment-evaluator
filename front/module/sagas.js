@@ -11,6 +11,8 @@ import {
   END_TASK,
   ADMIN_SUBMIT_FORM,
   LOAD_LATEST_TASK_INFO,
+  REQUEST_LATEST_SOLUTIONS,
+  receiveLatestSolutions,
   receiveLatestTaskInfo,
   receiveTask,
   timerTick,
@@ -102,9 +104,18 @@ function* watchLoadAdminFormSaga() {
     try {
       const { data } = yield call(api.fetchLatestTask)
       yield put(receiveLatestTaskInfo(data))
-    } catch (r) {
+    } catch (e) {
       yield put(failedLoadLatestTaskInfo())
     }
+  }
+}
+
+function* watchRequestLatestSolutionsSaga() {
+  while (yield take(REQUEST_LATEST_SOLUTIONS)) {
+    try {
+      const { data } = yield call(api.fetchLatestSolutions)
+      yield put(receiveLatestSolutions(data))
+    } catch (e) { console.error('Failed to retrieve solutions') }
   }
 }
 
@@ -131,7 +142,8 @@ const sagas = [
   watchStartTaskTimerSaga,
   watchEndTaskSaga,
   watchSubmitAdminFormSaga,
-  watchLoadAdminFormSaga
+  watchLoadAdminFormSaga,
+  watchRequestLatestSolutionsSaga
 ]
 
 export default function runSagas(sagaMiddleware) {

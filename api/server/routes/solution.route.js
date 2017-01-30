@@ -6,7 +6,8 @@ import solutionController from '../controllers/solution.controller'
 const router = express.Router()
 
 router.route('/')
-  // TODO: GET /api/solutions - Get list of solutions
+  /** GET /api/solutions - Get list of 10 latest solutions */
+  .get(solutionController.getLatest)
   /** POST /api/solutions - Create new solution or get active one */
   .post(validate(paramValidation.createSolution), solutionController.findOrCreate)
 

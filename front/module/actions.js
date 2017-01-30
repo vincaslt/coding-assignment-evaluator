@@ -47,6 +47,9 @@ export const adminSubmitForm = () => ({ type: ADMIN_SUBMIT_FORM })
 export const LOAD_LATEST_TASK_INFO = 'LOAD_LATEST_TASK_INFO'
 export const loadLatestTaskInfo = () => ({ type: LOAD_LATEST_TASK_INFO })
 
+export const REQUEST_LATEST_SOLUTIONS = 'REQUEST_LATEST_SOLUTIONS'
+export const requestLatestSolutions = () => ({ type: REQUEST_LATEST_SOLUTIONS })
+
 export const FAILED_LOAD_LATEST_TASK_INFO = 'FAILED_LOAD_LATEST_TASK_INFO'
 export const failedLoadLatestTaskInfo = () => ({ type: FAILED_LOAD_LATEST_TASK_INFO })
 
@@ -62,6 +65,16 @@ export const receiveLatestTaskInfo = ({
     timeLimit,
     tests: JSON.stringify(tests)
   }
+})
+
+export const RECEIVE_LATEST_SOLUTIONS = 'RECEIVE_LATEST_SOLUTIONS'
+export const receiveLatestSolutions = (solutions) => ({
+  type: RECEIVE_LATEST_SOLUTIONS,
+  payload: solutions.map(({ id, name, submittedAt }) => ({
+    id,
+    name,
+    submittedAt
+  }))
 })
 
 export const ADMIN_CHANGE_DESCRIPTION = 'ADMIN_CHANGE_DESCRIPTION'

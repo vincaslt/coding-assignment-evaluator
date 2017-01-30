@@ -15,7 +15,9 @@ import {
   ADMIN_CHANGE_PASSWORD,
   LOAD_LATEST_TASK_INFO,
   RECEIVE_LATEST_TASK_INFO,
-  FAILED_LOAD_LATEST_TASK_INFO
+  FAILED_LOAD_LATEST_TASK_INFO,
+  REQUEST_LATEST_SOLUTIONS,
+  RECEIVE_LATEST_SOLUTIONS
 } from './actions'
 
 const userInfoInitialState = { name: '' }
@@ -124,9 +126,28 @@ const taskForm = (state = taskFormInitialState, { type, payload }) => {
   }
 }
 
+const latestSolutionsInitialState = []
+const latestSolutions = (state = latestSolutionsInitialState, { type, payload }) => {
+  switch (type) {
+    case REQUEST_LATEST_SOLUTIONS:
+      return {
+        ...state,
+        loading: true
+      }
+    case RECEIVE_LATEST_SOLUTIONS:
+      return {
+        solutions: payload.slice(),
+        loading: false
+      }
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   userInfo,
   activeTask,
   code,
-  taskForm
+  taskForm,
+  latestSolutions
 })

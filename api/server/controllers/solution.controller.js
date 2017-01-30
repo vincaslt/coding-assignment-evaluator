@@ -57,6 +57,12 @@ function get(req, res) {
   return res.json(serializeSolution(req.solution))
 }
 
+function getLatest(req, res, next) {
+  Solution.getLatest(10)
+    .then(solutions => res.json(solutions.map(serializeSolution)))
+    .catch(e => next(e))
+}
+
 /**
  * Update the existing solution
  * @property {string} req.body.code - latest code.
@@ -92,4 +98,4 @@ function testSolution(solution) {
   })
 }
 
-export default { load, get, findOrCreate, create, update }
+export default { load, get, findOrCreate, create, update, getLatest }
