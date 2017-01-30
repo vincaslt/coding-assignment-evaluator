@@ -1,13 +1,15 @@
 import React, { PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
+import CodeMirror from 'react-codemirror'
+import 'codemirror/mode/javascript/javascript'
+import 'codemirror/lib/codemirror.css'
 import ListEntry, { ResultPropTypes } from './ListEntry'
-
 import Card from '../Card'
 import Button from '../Button'
 import Spinner from '../Spinner'
 import style from './style.css'
 
-const ResultsPage = ({ loading, results, onRefresh, author }) => {
+const ResultsPage = ({ description, code, loading, results, onRefresh, author }) => {
   const refreshButton = results.length === 0 && !loading ? (
     <div styleName="action">
       <Button onClick={() => onRefresh()}>refresh</Button>
@@ -24,6 +26,10 @@ const ResultsPage = ({ loading, results, onRefresh, author }) => {
     <div styleName="content-container">
       <div styleName="content">
         <Card headerText={`Results of ${author}`}>
+          <div styleName="description">{description}</div>
+          <div styleName="code-editor">
+            <CodeMirror value={code} options={{ lineNumbers: true, mode: 'javascript' }} />
+          </div>
           <div styleName="results">
             {resultsList}
             {refreshButton}
@@ -40,13 +46,17 @@ ResultsPage.propTypes = {
   results: PropTypes.arrayOf(
     PropTypes.shape(ResultPropTypes)
   ),
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  description: PropTypes.string,
+  code: PropTypes.string
 }
 
 ResultsPage.defaultProps = {
   author: '',
   results: [],
-  loading: false
+  loading: false,
+  code: '',
+  description: ''
 }
 
 export default CSSModules(ResultsPage, style)

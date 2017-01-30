@@ -21,3 +21,14 @@
 .action button {
   min-width: 60px;
 }
+
+.description {
+  margin: 10px 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.code-editor :global .CodeMirror {
+  border-radius: 5px;
+  border: 1px solid #CECECE;
+}

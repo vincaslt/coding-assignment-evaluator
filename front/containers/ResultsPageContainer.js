@@ -11,13 +11,15 @@ class ResultsPageContainer extends PureComponent {
   }
 
   render() {
-    const { results, loading, routeParams, loadTask, author } = this.props
+    const { description, results, loading, routeParams, loadTask, author, code } = this.props
     return (
       <ResultsPage
         onRefresh={() => loadTask(routeParams.id)}
         loading={loading}
         results={results}
         author={author}
+        description={description}
+        code={code}
       />
     )
   }
@@ -30,19 +32,25 @@ ResultsPageContainer.propTypes = {
   results: PropTypes.arrayOf(
     PropTypes.shape(ResultPropTypes)
   ),
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  code: PropTypes.string,
+  description: PropTypes.string,
 }
 
 ResultsPageContainer.defaultProps = {
   author: '',
   results: [],
-  loading: true
+  loading: true,
+  code: '',
+  description: '',
 }
 
 const mapStateToProps = state => ({
   results: activeTask(state).results,
   loading: activeTask(state).loading,
-  author: activeTask(state).solutionAuthor
+  author: activeTask(state).solutionAuthor,
+  code: activeTask(state).initialCode,
+  description: activeTask(state).description
 })
 
 const mapDispatchToProps = {
