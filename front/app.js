@@ -20,8 +20,8 @@ const store = createStore(reducers, compose(
     sagaMiddleware,
     routerMiddleware(browserHistory)
   ),
-  persistState('userInfo', { key: 'coding-assignemnt-evaluator.userInfo' }),
-  persistState('activeTask', { key: 'coding-assignemnt-evaluator.activeTask' }),
+  persistState('userInfo', { key: 'coding-assignment-evaluator.userInfo' }),
+  persistState('code', { key: 'coding-assignment-evaluator.code' }),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 ))
 runSagas(sagaMiddleware)

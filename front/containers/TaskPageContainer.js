@@ -11,7 +11,13 @@ class TaskPageContainer extends PureComponent {
 
   render() {
     const { description, loading, submit } = this.props
-    return <TaskPage description={description} loading={loading} onSubmit={submit} />
+    return (
+      <TaskPage
+        description={description}
+        loading={loading}
+        onSubmit={submit}
+      />
+    )
   }
 }
 

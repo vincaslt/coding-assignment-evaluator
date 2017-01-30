@@ -5,6 +5,7 @@ import CodeEditor from '../../containers/CodeEditor'
 import Card from '../Card'
 import Button from '../Button'
 import Spinner from '../Spinner'
+import Timer from '../../containers/TimerContainer'
 import style from './style.css'
 
 const TaskPage = ({ description, loading, onSubmit }) => (
@@ -18,7 +19,8 @@ const TaskPage = ({ description, loading, onSubmit }) => (
       <div styleName="code-editor">
         <Card headerText="Code">
           <CodeEditor />
-          <div styleName="actions">
+          <div styleName="bottom-container">
+            <Timer />
             <Button onClick={() => onSubmit()}>Submit</Button>
           </div>
         </Card>

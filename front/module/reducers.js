@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { SET_NAME, RECEIVE_TASK, SET_CODE, REQUEST_START_TASK, REQUEST_TASK } from './actions'
+import { SET_NAME, RECEIVE_TASK, SET_CODE, REQUEST_START_TASK, REQUEST_TASK, TIMER_TICK, END_TASK } from './actions'
 
 const userInfoInitialState = { name: '' }
 const userInfo = (state = userInfoInitialState, { type, payload }) => {
@@ -27,14 +27,27 @@ const activeTask = (state = activeTaskInitialState, { type, payload }) => {
       return {
         ...state,
         ...payload,
-        code: state.id === payload.id ? state.code || payload.initialCode : payload.initialCode,
         loading: false
       }
-    case SET_CODE:
+    case TIMER_TICK:
       return {
         ...state,
-        code: payload.code
+        remainingTime: state.remainingTime > 1000 ? state.remainingTime - 1000 : 0
       }
+    default:
+      return state
+  }
+}
+
+const codeInitialState = null
+const code = (state = codeInitialState, { type, payload }) => {
+  switch (type) {
+    case END_TASK:
+      return codeInitialState
+    case RECEIVE_TASK:
+      return state === null ? payload.initialCode.slice() : state
+    case SET_CODE:
+      return payload.code.slice()
     default:
       return state
   }
@@ -42,5 +55,6 @@ const activeTask = (state = activeTaskInitialState, { type, payload }) => {
 
 export default combineReducers({
   userInfo,
-  activeTask
+  activeTask,
+  code
 })

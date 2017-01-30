@@ -73,7 +73,9 @@ SolutionSchema.statics = {
     return this.find(query)
       .exec()
       .then((solutions = []) => {
-        const activeSolution = solutions.find(solution => solution.getRemainingTime() > 0)
+        const activeSolution = solutions.find(solution => (
+          solution.getRemainingTime() > 0 && !solution.submittedAt
+        ))
         if (activeSolution) {
           return activeSolution
         }

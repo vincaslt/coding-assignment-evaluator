@@ -27,3 +27,15 @@ export const setCode = code => ({ type: SET_CODE, payload: { code } })
 
 export const SUBMIT_SOLUTION = 'SUBMIT_SOLUTION'
 export const submitSolution = () => ({ type: SUBMIT_SOLUTION })
+
+export const START_TASK_TIMER = 'START_TASK_TIMER'
+export const startTaskTimer = () => ({ type: START_TASK_TIMER })
+
+export const STOP_TASK_TIMER = 'STOP_TASK_TIMER'
+export const stopTaskTimer = () => ({ type: STOP_TASK_TIMER })
+
+export const TIMER_TICK = 'TIMER_TICK'
+export const timerTick = () => ({ type: TIMER_TICK })
+
+export const END_TASK = 'END_TASK'
+export const endTask = () => ({ type: END_TASK })
