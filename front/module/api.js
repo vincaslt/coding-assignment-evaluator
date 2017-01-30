@@ -20,4 +20,15 @@ function submitSolution(taskId, code) {
   return fetch.post(`solutions/${taskId}`, { code })
 }
 
-export default { fetchActiveTask, fetchTaskById, submitSolution }
+function submitTaskForm({ description, execName, code, timeLimit, tests, password }) {
+  return fetch.post('tasks', {
+    initialCode: code,
+    description,
+    execName,
+    timeLimit,
+    tests: JSON.parse(tests),
+    password
+  })
+}
+
+export default { fetchActiveTask, fetchTaskById, submitSolution, submitTaskForm }

@@ -1,5 +1,19 @@
 import { combineReducers } from 'redux'
-import { SET_NAME, RECEIVE_TASK, SET_CODE, REQUEST_START_TASK, REQUEST_TASK, TIMER_TICK, END_TASK } from './actions'
+import {
+  SET_NAME,
+  RECEIVE_TASK,
+  SET_CODE,
+  REQUEST_START_TASK,
+  REQUEST_TASK,
+  TIMER_TICK,
+  END_TASK,
+  ADMIN_CHANGE_EXEC,
+  ADMIN_CHANGE_DESCRIPTION,
+  ADMIN_CHANGE_CODE,
+  ADMIN_CHANGE_TIME_LIMIT,
+  ADMIN_CHANGE_TESTS,
+  ADMIN_CHANGE_PASSWORD
+} from './actions'
 
 const userInfoInitialState = { name: '' }
 const userInfo = (state = userInfoInitialState, { type, payload }) => {
@@ -53,8 +67,47 @@ const code = (state = codeInitialState, { type, payload }) => {
   }
 }
 
+const taskFormInitialState = {}
+const taskForm = (state = taskFormInitialState, { type, payload }) => {
+  switch (type) {
+    case ADMIN_CHANGE_DESCRIPTION:
+      return {
+        ...state,
+        description: payload.description
+      }
+    case ADMIN_CHANGE_CODE:
+      return {
+        ...state,
+        code: payload.code
+      }
+    case ADMIN_CHANGE_EXEC:
+      return {
+        ...state,
+        execName: payload.execName
+      }
+    case ADMIN_CHANGE_TIME_LIMIT:
+      return {
+        ...state,
+        timeLimit: payload.timeLimit
+      }
+    case ADMIN_CHANGE_TESTS:
+      return {
+        ...state,
+        tests: payload.tests
+      }
+    case ADMIN_CHANGE_PASSWORD:
+      return {
+        ...state,
+        password: payload.password
+      }
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   userInfo,
   activeTask,
-  code
+  code,
+  taskForm
 })

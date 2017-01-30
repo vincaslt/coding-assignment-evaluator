@@ -1,9 +1,22 @@
 import { select, call, takeEvery, put, take, cancel, fork } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import { push } from 'react-router-redux'
-import { REQUEST_START_TASK, REQUEST_TASK, SUBMIT_SOLUTION, START_TASK_TIMER, STOP_TASK_TIMER, RECEIVE_TASK, END_TASK, receiveTask, timerTick, stopTaskTimer, endTask } from './actions'
+import {
+  REQUEST_START_TASK,
+  REQUEST_TASK,
+  SUBMIT_SOLUTION,
+  START_TASK_TIMER,
+  STOP_TASK_TIMER,
+  RECEIVE_TASK,
+  END_TASK,
+  ADMIN_SUBMIT_FORM,
+  receiveTask,
+  timerTick,
+  stopTaskTimer,
+  endTask
+} from './actions'
 import api from './api'
-import { userInfo, activeTask, code as codeSelector } from './selectors'
+import { userInfo, activeTask, taskForm, code as codeSelector } from './selectors'
 
 function* saveTaskData(data) {
   yield put(receiveTask({
@@ -69,6 +82,18 @@ function* watchEndTaskSaga() {
   }
 }
 
+function* watchSubmitAdminFormSaga() {
+  while (yield take(ADMIN_SUBMIT_FORM)) {
+    const form = yield select(taskForm)
+    try {
+      yield call(api.submitTaskForm, form)
+      yield put(push('/'))
+    } catch (e) {
+      console.error('invalid parameters')
+    }
+  }
+}
+
 function* watchStartTaskTimerSaga() {
   while (yield take(START_TASK_TIMER)) {
     let task = yield select(activeTask)
@@ -90,7 +115,8 @@ const sagas = [
   watchRequestTaskSaga,
   watchSubmitSolutionSaga,
   watchStartTaskTimerSaga,
-  watchEndTaskSaga
+  watchEndTaskSaga,
+  watchSubmitAdminFormSaga
 ]
 
 export default function runSagas(sagaMiddleware) {

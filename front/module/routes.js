@@ -2,6 +2,7 @@ import MainPage from '../containers/MainPageContainer'
 import TaskPage from '../containers/TaskPageContainer'
 import ResultsPage from '../containers/ResultsPageContainer'
 import AppLayout from '../components/AppLayout'
+import AdminPage from '../containers/AdminPageContainer'
 
 const routes = {
   path: '/',
@@ -15,6 +16,10 @@ const routes = {
     {
       path: 'task/:id/results',
       component: ResultsPage
+    },
+    {
+      path: 'admin',
+      component: AdminPage
     }
   ]
 }

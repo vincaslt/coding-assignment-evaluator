@@ -39,3 +39,43 @@ export const timerTick = () => ({ type: TIMER_TICK })
 
 export const END_TASK = 'END_TASK'
 export const endTask = () => ({ type: END_TASK })
+
+/* Admin Form Actions */
+export const ADMIN_SUBMIT_FORM = 'ADMIN_SUBMIT_FORM'
+export const adminSubmitForm = () => ({ type: ADMIN_SUBMIT_FORM })
+
+export const ADMIN_CHANGE_DESCRIPTION = 'ADMIN_CHANGE_DESCRIPTION'
+export const adminChangeDescription = description => ({
+  type: ADMIN_CHANGE_DESCRIPTION,
+  payload: { description }
+})
+
+export const ADMIN_CHANGE_CODE = 'ADMIN_CHANGE_CODE'
+export const adminChangeCode = code => ({
+  type: ADMIN_CHANGE_CODE,
+  payload: { code }
+})
+
+export const ADMIN_CHANGE_EXEC = 'ADMIN_CHANGE_EXEC'
+export const adminChangeExec = execName => ({
+  type: ADMIN_CHANGE_EXEC,
+  payload: { execName }
+})
+
+export const ADMIN_CHANGE_TIME_LIMIT = 'ADMIN_CHANGE_TIME_LIMIT'
+export const adminChangeTimeLimit = timeLimit => ({
+  type: ADMIN_CHANGE_TIME_LIMIT,
+  payload: { timeLimit }
+})
+
+export const ADMIN_CHANGE_TESTS = 'ADMIN_CHANGE_TESTS'
+export const adminChangeTests = tests => ({
+  type: ADMIN_CHANGE_TESTS,
+  payload: { tests }
+})
+
+export const ADMIN_CHANGE_PASSWORD = 'ADMIN_CHANGE_PASSWORD'
+export const adminChangePassword = password => ({
+  type: ADMIN_CHANGE_PASSWORD,
+  payload: { password }
+})

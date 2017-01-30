@@ -1,0 +1,31 @@
+.content-container {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.content {
+  width: 50%;
+}
+
+.task-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  border: 1px solid #B4ADEA;
+  padding: 5px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.action {
+  flex-direction: row;
+  justify-content: flex-end;
+  display: flex;
+}
+
+.action button {
+  min-width: 60px;
+}

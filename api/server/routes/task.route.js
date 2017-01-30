@@ -8,5 +8,6 @@ const router = express.Router()
 router.route('/')
   /** POST /api/tasks - Create a new active task */
   .post(validate(paramValidation.createTask), taskController.create)
+  // TODO retrieval
 
 export default router
