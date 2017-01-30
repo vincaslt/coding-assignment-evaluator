@@ -68,7 +68,7 @@ SolutionSchema.statics = {
         if (solution) {
           return solution
         }
-        return Promise.reject(new APIError('No such solution exists!', httpStatus.NOT_FOUND))
+        return Promise.reject(new APIError('No such solution exists!', httpStatus.NOT_FOUND, true))
       })
   },
 
@@ -83,7 +83,7 @@ SolutionSchema.statics = {
         if (activeSolution) {
           return activeSolution
         }
-        return Promise.reject(new APIError('No active solution exists!', httpStatus.NOT_FOUND))
+        return Promise.reject(new APIError('No active solution exists!', httpStatus.NOT_FOUND, true))
       })
   }
 }

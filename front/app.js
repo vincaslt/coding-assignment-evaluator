@@ -30,5 +30,5 @@ render(
   <Provider store={store}>
     <Router history={browserHistory} routes={routes} />
   </Provider>,
-  document.getElementById('coding-app')
+  document.body
 )

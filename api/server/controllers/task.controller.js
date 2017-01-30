@@ -28,7 +28,7 @@ function create(req, res, next) {
       .then(savedTask => res.json(serializeTask(savedTask)))
       .catch(e => next(e))
   } else {
-    next(new APIError('Invalid password!', httpStatus.FORBIDDEN))
+    next(new APIError('Invalid password!', httpStatus.FORBIDDEN, true))
   }
 }
 

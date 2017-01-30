@@ -47,6 +47,9 @@ export const adminSubmitForm = () => ({ type: ADMIN_SUBMIT_FORM })
 export const LOAD_LATEST_TASK_INFO = 'LOAD_LATEST_TASK_INFO'
 export const loadLatestTaskInfo = () => ({ type: LOAD_LATEST_TASK_INFO })
 
+export const FAILED_LOAD_LATEST_TASK_INFO = 'FAILED_LOAD_LATEST_TASK_INFO'
+export const failedLoadLatestTaskInfo = () => ({ type: FAILED_LOAD_LATEST_TASK_INFO })
+
 export const RECEIVE_LATEST_TASK_INFO = 'RECEIVE_LATEST_TASK_INFO'
 export const receiveLatestTaskInfo = ({
   description, initialCode, execName, timeLimit, tests

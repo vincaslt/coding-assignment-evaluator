@@ -14,7 +14,8 @@ import {
   ADMIN_CHANGE_TESTS,
   ADMIN_CHANGE_PASSWORD,
   LOAD_LATEST_TASK_INFO,
-  RECEIVE_LATEST_TASK_INFO
+  RECEIVE_LATEST_TASK_INFO,
+  FAILED_LOAD_LATEST_TASK_INFO
 } from './actions'
 
 const userInfoInitialState = { name: '' }
@@ -111,6 +112,11 @@ const taskForm = (state = taskFormInitialState, { type, payload }) => {
       return {
         ...state,
         ...payload,
+        loading: false
+      }
+    case FAILED_LOAD_LATEST_TASK_INFO:
+      return {
+        ...state,
         loading: false
       }
     default:

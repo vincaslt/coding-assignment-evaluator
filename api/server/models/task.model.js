@@ -55,7 +55,7 @@ TaskSchema.statics = {
         if (task) {
           return task
         }
-        return Promise.reject(new APIError('No such task exists!', httpStatus.NOT_FOUND))
+        return Promise.reject(new APIError('No such task exists!', httpStatus.NOT_FOUND, true))
       })
   },
 
@@ -71,7 +71,7 @@ TaskSchema.statics = {
         if (task) {
           return task
         }
-        return Promise.reject(new APIError('There are no tasks created!', httpStatus.NOT_FOUND))
+        return Promise.reject(new APIError('There are no tasks created!', httpStatus.NOT_FOUND, true))
       })
   }
 }

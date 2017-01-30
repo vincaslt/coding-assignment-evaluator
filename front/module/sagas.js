@@ -15,6 +15,7 @@ import {
   receiveTask,
   timerTick,
   stopTaskTimer,
+  failedLoadLatestTaskInfo,
   endTask
 } from './actions'
 import api from './api'
@@ -98,8 +99,12 @@ function* watchSubmitAdminFormSaga() {
 
 function* watchLoadAdminFormSaga() {
   while (yield take(LOAD_LATEST_TASK_INFO)) {
-    const { data } = yield call(api.fetchLatestTask)
-    yield put(receiveLatestTaskInfo(data))
+    try {
+      const { data } = yield call(api.fetchLatestTask)
+      yield put(receiveLatestTaskInfo(data))
+    } catch (r) {
+      yield put(failedLoadLatestTaskInfo())
+    }
   }
 }
 

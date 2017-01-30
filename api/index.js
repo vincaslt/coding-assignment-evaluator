@@ -26,7 +26,7 @@ if (config.MONGOOSE_DEBUG) {
 // src: https://github.com/mochajs/mocha/issues/1912
 if (!module.parent) {
   // listen on port config.port
-  app.listen(config.port, '0.0.0.0', () => {
+  app.listen(config.port || 3000, config.host || '0.0.0.0', () => {
     debug(`server started on port ${config.port} (${config.env})`)
   })
 }
