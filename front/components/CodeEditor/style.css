@@ -1,0 +1,8 @@
+.code-editor :global .CodeMirror {
+  border-radius: 5px;
+  border: 1px solid #CECECE;
+}
+
+.code-editor {
+  margin-bottom: 10px;
+}

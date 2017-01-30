@@ -16,7 +16,7 @@ const TaskPage = ({ description, loading, onSubmit }) => (
           <div>{description}</div>
         </Card>
       </div>
-      <div styleName="code-editor">
+      <div styleName="code-editor-container">
         <Card headerText="Code">
           <CodeEditor />
           <div styleName="bottom-container">

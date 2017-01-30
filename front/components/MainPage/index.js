@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
-
+import Input from '../Input'
 import Button from '../Button'
 import Card from '../Card'
 import style from './style.css'
@@ -10,8 +10,7 @@ const MainPage = ({ name, onNameInputChange, onStartClick }) => (
     <div styleName="content">
       <Card headerText="Begin task">
         <div styleName="user-info">
-          <input
-            styleName="input"
+          <Input
             type="text"
             placeholder="Your Name"
             value={name}

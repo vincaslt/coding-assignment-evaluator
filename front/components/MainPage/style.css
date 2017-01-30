@@ -13,13 +13,6 @@
   flex-direction: column;
 }
 
-.input {
-  border: 1px solid #B4ADEA;
-  padding: 5px;
-  border-radius: 3px;
-  margin-bottom: 10px;
-}
-
 .action {
   justify-content: center;
   display: flex;

@@ -1,7 +1,5 @@
-import CodeMirror from 'react-codemirror'
 import { connect } from 'react-redux'
-import 'codemirror/mode/javascript/javascript'
-import 'codemirror/lib/codemirror.css'
+import CodeEditor from '../components/CodeEditor'
 import { code } from '../module/selectors'
 import { setCode } from '../module/actions'
 
@@ -19,4 +17,4 @@ const mapDispatchToProps = {
   onChange: newCode => setCode(newCode)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CodeMirror)
+export default connect(mapStateToProps, mapDispatchToProps)(CodeEditor)

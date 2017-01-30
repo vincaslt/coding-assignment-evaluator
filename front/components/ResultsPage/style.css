@@ -14,7 +14,8 @@
 }
 
 .action {
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-end;
   display: flex;
 }
 
@@ -26,9 +27,4 @@
   margin: 10px 0;
   max-height: 150px;
   overflow-y: auto;
-}
-
-.code-editor :global .CodeMirror {
-  border-radius: 5px;
-  border: 1px solid #CECECE;
 }

@@ -5,19 +5,27 @@
 }
 
 .content {
-  width: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+@media(max-width: 1279px) {
+  .content {
+    flex-direction: column;
+  }
+}
+
+.content > div {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
 }
 
 .task-info {
   display: flex;
   flex-direction: column;
-}
-
-.input {
-  border: 1px solid #B4ADEA;
-  padding: 5px;
-  border-radius: 3px;
-  margin-bottom: 10px;
 }
 
 .action {

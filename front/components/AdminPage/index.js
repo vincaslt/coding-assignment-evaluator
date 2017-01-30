@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
 import Button from '../Button'
 import Card from '../Card'
+import CodeEditor from '../CodeEditor'
+import Input from '../Input'
 import SolutionEntry, { SolutionEntryPropTypes } from './SolutionEntry'
 import style from './style.css'
 
@@ -33,43 +35,36 @@ const AdminPage = ({
       <div styleName="content">
         <Card headerText="Task information">
           <div styleName="task-info">
-            <input
-              styleName="input"
+            <Input
               type="text"
               placeholder="Description"
+              multiline
               value={description}
               onChange={e => onChangeDescription(e.target.value)}
             />
-            <input
-              styleName="input"
-              type="text"
-              placeholder="Code"
+            <CodeEditor
               value={code}
-              onChange={e => onChangeCode(e.target.value)}
+              options={{ lineNumbers: true, mode: 'javascript' }}
+              onChange={newCode => onChangeCode(newCode)}
             />
-            <input
-              styleName="input"
+            <CodeEditor
+              value={testsString}
+              options={{ lineNumbers: true, mode: 'javascript' }}
+              onChange={newCode => onChangeTests(newCode)}
+            />
+            <Input
               type="text"
               placeholder="Executable function"
               value={execName}
               onChange={e => onChangeExecName(e.target.value)}
             />
-            <input
-              styleName="input"
+            <Input
               type="number"
               placeholder="Time limit"
               value={timeLimit}
               onChange={e => onChangeTimeLimit(e.target.value)}
             />
-            <input
-              styleName="input"
-              type="text"
-              placeholder="Tests"
-              value={testsString}
-              onChange={e => onChangeTests(e.target.value)}
-            />
-            <input
-              styleName="input"
+            <Input
               type="password"
               placeholder="Password"
               onChange={e => onChangePassword(e.target.value)}
@@ -112,10 +107,10 @@ export const propTypes = {
 
 export const defaultProps = {
   description: '',
-  code: '',
+  code: '//Initial code',
   execName: '',
   timeLimit: 0,
-  testsString: '',
+  testsString: 'Tests',
   solutions: []
 }
 

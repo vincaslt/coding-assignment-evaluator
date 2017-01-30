@@ -5,14 +5,9 @@
   justify-content: center;
 }
 
-.code-editor {
+.code-editor-container {
   flex: 1;
   padding-left: 25px;
-}
-
-.code-editor :global .CodeMirror {
-  border-radius: 5px;
-  border: 1px solid #CECECE;
 }
 
 .description {
@@ -24,5 +19,4 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  padding-top: 10px;
 }

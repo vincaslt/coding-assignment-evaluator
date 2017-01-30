@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react'
 import CSSModules from 'react-css-modules'
-import CodeMirror from 'react-codemirror'
-import 'codemirror/mode/javascript/javascript'
-import 'codemirror/lib/codemirror.css'
+import CodeEditor from '../../components/CodeEditor'
 import ListEntry, { ResultPropTypes } from './ListEntry'
 import Card from '../Card'
 import Button from '../Button'
@@ -27,9 +25,7 @@ const ResultsPage = ({ description, code, loading, results, onRefresh, author })
       <div styleName="content">
         <Card headerText={`Results of ${author}`}>
           <div styleName="description">{description}</div>
-          <div styleName="code-editor">
-            <CodeMirror value={code} options={{ lineNumbers: true, mode: 'javascript' }} />
-          </div>
+          <CodeEditor value={code} options={{ lineNumbers: true, mode: 'javascript', readOnly: true }} />
           <div styleName="results">
             {resultsList}
             {refreshButton}
