@@ -11,10 +11,13 @@ To make changes enter the password: `bvzRTaz21x`
 
 Tests must be in JSON format, like:
 ```
-tests: array of {
-  arguments: Array of valid JS types,
-  result: valid JS type
-}
+[
+  {
+    "arguments": Array of valid JS types,
+    "result": valid JS type
+  },
+  ...
+]
 ```
 
 Executable function is the same as the function name in code, e.x.:
